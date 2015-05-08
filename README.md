@@ -8,9 +8,9 @@ multiple recipients. Likewise, AES256-GCM works well for large messages but requ
 capable of generating the secret key be communicated out of band.
 
 ## Encrypt 
-Signature: ( **plainText** *[]byte*, **authorizedPubKeys** *[]\*[32]byte*, **selfPubKey**, **selfPrivKey** *\*[32]byte*)
+*Signature:* ( **plainText** []byte, **authorizedPubKeys** []*[32]byte, **selfPubKey**, **selfPrivKey** *[32]byte)
 
-Returns: ( **[]byte** )
+*Returns:* []byte
 
 The passed `plainText` is encrypted with AES256-GCM using a randomly generated 32 byte key and a unique salt.
 That key is then encrypted with each of the NACL public keys in the `authorizedPubKeys` array.
@@ -29,9 +29,9 @@ usersPubKeyFingerprint(20 bytes) NaClNonce(24 bytes) NaClSecret(48 bytes)
 ```
 
 ## Decrypt
-Signature: ( **blob** *[]byte*, **selfPubKey**, **selfPrivKey** *\*[32]byte* ) 
+*Signature:* ( **blob** []byte, **selfPubKey**, **selfPrivKey** *[32]byte ) 
 
-Returns: ( **plainText** *[]byte*, **err** *error* )
+*Returns:* []byte, error
 
 The decrypter uses it's knowledge of the encrypted `blob` and breaks it appart into pieces. It loops
 through the 92 byte chunks at the end until it finds a key fingerprint that matches the passed in
