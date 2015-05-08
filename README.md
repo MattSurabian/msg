@@ -8,7 +8,7 @@ multiple recipients. Likewise, AES256-GCM works well for large messages but requ
 capable of generating the secret key be communicated out of band.
 
 ## Encrypt 
-*Signature:* ( **plainText** []byte, **authorizedPubKeys** []*[32]byte, **selfPubKey**, **selfPrivKey** *[32]byte)
+*Signature:* ( **plainText** []byte, **authorizedPubKeys** []\*[32]byte, **selfPubKey**, **selfPrivKey** \*[32]byte)
 
 *Returns:* []byte
 
@@ -29,7 +29,7 @@ usersPubKeyFingerprint(20 bytes) NaClNonce(24 bytes) NaClSecret(48 bytes)
 ```
 
 ## Decrypt
-*Signature:* ( **blob** []byte, **selfPubKey**, **selfPrivKey** *[32]byte ) 
+*Signature:* ( **blob** []byte, **selfPubKey**, **selfPrivKey** \*[32]byte ) 
 
 *Returns:* []byte, error
 
