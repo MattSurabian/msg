@@ -84,12 +84,23 @@ func ReadNACLKeyFile(keyFilePath string) *[32]byte {
 		log.Fatal(err)
 	}
 
-	keyBytes, err := base64.StdEncoding.DecodeString(string(keyFile))
+	return ReadNACLKeyString(string(keyFile))
+}
+
+/**
+ * ReadNACLKeyString
+ * Helper method to read encoded NACL key data strings and return an NACL key.
+ * Because this is a helper method, we assume the string passed in is encoded
+ * as base64.
+ */
+func ReadNACLKeyString(encodedKey string) *[32]byte {
+	keyBytes, err := base64.StdEncoding.DecodeString(encodedKey)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	return ConvertBytesToNACLKey(keyBytes)
+	naclKey := ConvertBytesToNACLKey(keyBytes)
+	return naclKey
 }
 
 /**
