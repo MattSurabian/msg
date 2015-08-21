@@ -1,11 +1,13 @@
 # MSG
+An experimental crytographic library for Go.
 
-Named after Monosodium Glutamate, the MSG encryption library is written in Go and uses AES256-GCM and NACL to 
-facilitate secure data data sharing between multiple parties without need for out of band secret key transmission.
+Named after Monosodium Glutamate, the MSG encryption library is written in Go and uses AES256-GCM and NaCl to 
+facilitate secure data sharing between multiple parties without need for out of band secret key or passphrase transmission.
 
-While NaCl is great for securing short messages between two parties, it doesn't support creating a single cipher text for 
-multiple recipients. Likewise, AES256-GCM works well for large messages but requires that the secret key or a passphrase 
-capable of generating the secret key be communicated out of band.
+NaCl's simplicity and security come at a price. Multiple party decryption of a single ciphertext is not possible without shared keys. 
+Instead, new cipher text must be created for each individual with which a user intends to communicate.
+MSG addresses this by using AES-256-GCM (Galois Counter Mode) to secure the initial message and then encrypting the secret key used by AES with NaCl. 
+The final ciphertext is the concatenation of the AES-256-GCM cipher text with fixed size repeating blocks of NaCl ciphertext containing the key necessary to decrypt the original message.
 
 ## Encrypt 
 *Signature:* ( **plainText** []byte, **authorizedPubKeys** []\*[32]byte, **selfPubKey**, **selfPrivKey** \*[32]byte)
