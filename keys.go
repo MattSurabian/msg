@@ -94,7 +94,9 @@ func ReadNACLKeyFile(keyFilePath string) *[32]byte {
  * as base64.
  */
 func ReadNACLKeyString(encodedKey string) *[32]byte {
-	keyBytes, err := base64.StdEncoding.DecodeString(encodedKey)
+	// NaCl keys in base64 are 44 characters long. By only reading the first 44 chars
+	// we allow for key strings to include comments
+	keyBytes, err := base64.StdEncoding.DecodeString(encodedKey[:44])
 	if err != nil {
 		log.Fatal(err)
 	}
