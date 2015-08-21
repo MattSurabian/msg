@@ -15,7 +15,7 @@ The final ciphertext is the concatenation of the AES-256-GCM cipher text with fi
 *Returns:* []byte
 
 The passed `plainText` is encrypted with AES256-GCM using a randomly generated 32 byte key and a unique salt.
-That key is then encrypted with each of the NACL public keys in the `authorizedPubKeys` array.
+That key is then encrypted with each of the NaCl public keys in the `authorizedPubKeys` array.
 
 The returned byte array is assembled like so:
 

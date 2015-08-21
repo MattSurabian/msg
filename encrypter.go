@@ -14,7 +14,7 @@
  * GCM is used to secure the actual plain text which is passed into the Encrypt method.
  * The required 32 byte AES key is generated randomly, as is the 12 byte nonce.
  *
- * WHAT IS NACL USED FOR?
+ * WHAT IS NaCl USED FOR?
  * NaCl is used to allow the "owner" of the secret data to secure the random 32 byte key used
  * in AES256-GCM by encrypting it with each authorized user's public key.
  *
