@@ -41,7 +41,8 @@ import (
 )
 
 // Always store ctLength in a fixed size block. This should be large
-// enough to capture the ctLength for VERY large files.
+// enough to capture the ctLength for VERY large files. GCM should be
+// capable of securing terrabytes of data without the need for a key change.
 // This block size must be fixed in order for us to predictably
 // chop up the cipher text when we try to decrypt
 const CTLENGTH_BLOCK_SIZE = 16
