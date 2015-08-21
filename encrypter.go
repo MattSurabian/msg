@@ -8,7 +8,7 @@
  * Yes, but they are NOT used on top of one another. Each technology is used independently and
  * their outputs are combined into a large cipher text blob which provides secure data sharing
  * among many individuals without requiring out of band passphrase sharing, something
- * neither encryption technology is able to achieve on its own.
+ * neither encryption technology is able of achieving on its own.
  *
  * WHAT IS GCM USED FOR?
  * GCM is used to secure the actual plain text which is passed into the Encrypt method.
