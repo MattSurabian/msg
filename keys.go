@@ -64,9 +64,10 @@ func GenerateNACLKeyPair() (pubKey, privKey *[32]byte) {
  * WriteNACLKeyFile
  * Helper method that encodes NACL keys to base64 then writes them to disk.
  */
-func WriteNACLKeyFile(keyFilePath string, key *[32]byte, perms os.FileMode) {
+func WriteNACLKeyFile(keyFilePath string, key *[32]byte, keyComment string, perms os.FileMode) {
 	encodedKey := base64.StdEncoding.EncodeToString(key[:])
-	err := ioutil.WriteFile(keyFilePath, []byte(encodedKey), perms)
+
+	err := ioutil.WriteFile(keyFilePath, []byte(encodedKey + keyComment), perms)
 	if err != nil {
 		log.Fatal(err)
 	}
