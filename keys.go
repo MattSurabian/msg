@@ -106,7 +106,7 @@ func StringToNACLKey(encodedKeyString string) *[32]byte {
 		log.Fatal(err)
 	}
 
-	naclKey := ConvertBytesToNACLKey(keyBytes)
+	naclKey := BytesToNACLKey(keyBytes)
 	return naclKey
 }
 
@@ -122,11 +122,11 @@ func GetNACLKeyFingerprint(key *[32]byte) []byte {
 }
 
 /**
- * ConvertBytesToNACLKey
+ * BytesToNACLKey
  * Helper that takes in a byte array and casts it to *[32]byte so it can be used
  * as an NACL key. This is used by ReadNACLKeyFile.
  */
-func ConvertBytesToNACLKey(bytes []byte) *[32]byte {
+func BytesToNACLKey(bytes []byte) *[32]byte {
 	if len(bytes) < 32 {
 		log.Fatal("Too few bytes! This does not appear to be a valid NACL Key")
 	}

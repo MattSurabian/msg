@@ -49,15 +49,15 @@ func GenerateGCMNonce() []byte {
  * Generate a random nonce for use with NaCl
  */
 func GenerateNACLNonce() *[24]byte {
-	return ConvertBytesToNACLNonce(ReadFromRand(NACL_NONCE_BYTES))
+	return BytesToNACLNonce(ReadFromRand(NACL_NONCE_BYTES))
 }
 
 /**
- * ConvertBytesToNACLNonce
+ * BytesToNACLNonce
  * Read in a byte array and attempt to cast it to *[24]byte for use with
  * NACL as a Nonce.
  */
-func ConvertBytesToNACLNonce(bytes []byte) *[24]byte {
+func BytesToNACLNonce(bytes []byte) *[24]byte {
 	if len(bytes) < NACL_NONCE_BYTES {
 		log.Fatal("Too few bytes! This does not appear to be a valid NACL Nonce")
 	}

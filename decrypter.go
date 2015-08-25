@@ -38,7 +38,7 @@ func Decrypt(blob []byte, selfPubKey, selfPrivKey *[32]byte) (plainText []byte, 
 	ctEndIndex := CTLENGTH_BLOCK_END + ctlength
 	cipherText := blob[CTLENGTH_BLOCK_END:ctEndIndex]
 	secretOwnerKeyEndIndex := ctEndIndex + NACL_KEY_BYTES
-	secretOwnerPubKey := ConvertBytesToNACLKey(blob[ctEndIndex:secretOwnerKeyEndIndex])
+	secretOwnerPubKey := BytesToNACLKey(blob[ctEndIndex:secretOwnerKeyEndIndex])
 
 	// Find an encrypted secret that we are able to decrypt by matching our public key
 	// fingerprint with the first 20 bytes of the 92 byte payload
@@ -52,7 +52,7 @@ func Decrypt(blob []byte, selfPubKey, selfPrivKey *[32]byte) (plainText []byte, 
 		chunkFingerprint := blob[i:fingerPrintEndIndex]
 		// If the fingerprints match this chunk was made just for us :-)
 		if bytes.Equal(ourFingerprint, chunkFingerprint) {
-			naclNonce = ConvertBytesToNACLNonce(blob[fingerPrintEndIndex:nonceEndIndex])
+			naclNonce = BytesToNACLNonce(blob[fingerPrintEndIndex:nonceEndIndex])
 			encryptedKey = blob[nonceEndIndex:keyEndIndex]
 			break
 		}
