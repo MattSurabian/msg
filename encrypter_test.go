@@ -6,10 +6,10 @@ import (
 )
 
 func TestEncrypt(t *testing.T) {
-	userAPublicKey := ReadNACLKeyFile("testdata/a_public.key")
-	userBPublicKey := ReadNACLKeyFile("testdata/b_public.key")
+	userAPublicKey := NACLKeyFromFile("testdata/a_public.key")
+	userBPublicKey := NACLKeyFromFile("testdata/b_public.key")
 
-	selfPrivKey := ReadNACLKeyFile("testdata/a_private.key")
+	selfPrivKey := NACLKeyFromFile("testdata/a_private.key")
 	selfPubKey := userAPublicKey
 
 	plainText := []byte("I enjoy sport")

@@ -76,28 +76,32 @@ func WriteNACLKeyFile(keyFilePath string, key *[32]byte, keyComment string, perm
 /**
  * ReadNACLKeyFile
  * Helper method to read NACL key files that were written to disk with WriteNACLKeyFile.
- * Because this is a companion method, we assume the file being read has been encoded
- * as base64.
  */
-func ReadNACLKeyFile(keyFilePath string) *[32]byte {
+func ReadNACLKeyFile(keyFilePath string) string {
 	keyFile, err := ioutil.ReadFile(keyFilePath)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	return ReadNACLKeyString(string(keyFile))
+	return string(keyFile)
 }
 
 /**
- * ReadNACLKeyString
+ * NACLKeyFromFile
+ * Helper method that reads files containing an NaCl key string and returns an NaCl key.
+ */
+func NACLKeyFromFile(filePath string) *[32]byte {
+	return StringToNACLKey(ReadNACLKeyFile(filePath))
+}
+
+/**
+ * StringToNACLKey
  * Helper method to read encoded NACL key data strings and return an NACL key.
  * Because this is a helper method, we assume the string passed in is encoded
  * as base64.
  */
-func ReadNACLKeyString(encodedKey string) *[32]byte {
-	// NaCl keys in base64 are 44 characters long. By only reading the first 44 chars
-	// we allow for key strings to include comments
-	keyBytes, err := base64.StdEncoding.DecodeString(encodedKey[:44])
+func StringToNACLKey(encodedKeyString string) *[32]byte {
+	keyBytes, err := base64.StdEncoding.DecodeString(encodedKeyString[:44])
 	if err != nil {
 		log.Fatal(err)
 	}

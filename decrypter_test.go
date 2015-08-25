@@ -13,11 +13,11 @@ var largeDataTestBytes = 10000000 // 10MB
 var largeDataTestFilePath = "testdata/largeRandomDataFile.txt"
 
 func TestDecrypt(t *testing.T) {
-	userAPublicKey := ReadNACLKeyFile("testdata/a_public.key")
-	userBPublicKey := ReadNACLKeyFile("testdata/b_public.key")
+	userAPublicKey := NACLKeyFromFile("testdata/a_public.key")
+	userBPublicKey := NACLKeyFromFile("testdata/b_public.key")
 	authorizedUserKeys := []*[32]byte{userAPublicKey, userBPublicKey}
 
-	selfPrivKey := ReadNACLKeyFile("testdata/a_private.key")
+	selfPrivKey := NACLKeyFromFile("testdata/a_private.key")
 	selfPubKey := userAPublicKey
 
 	writeLargeRandomDataFile()
